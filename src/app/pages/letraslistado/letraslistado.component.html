@@ -1,0 +1,126 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="d-flex flex-row justify-content-between">
+      <h2 class="text-white h2">Menu de Letras</h2>
+      <button type="button" class="btn btn-success  btn-sm mr-1" (click)="closed()">
+        Crear Nueva Letra
+      </button>
+    </div>
+  </div>
+  <div class="col-sm-12" *ngIf="!asignar">
+    <div class="row row-cols-1 row-cols-md-4">
+      <div class="col mb-4" *ngFor="let item of letras" >
+        <div class="card border-primary mb-3" style="max-width: 18rem;">
+          <div class="card-header">
+            <div class="btn-group mr-1 d-flex flex-row justify-content-around">
+              <button type="button" class="btn btn-info  btn-sm mr-1" *ngIf="!item.active" (click)="setletra(item)">
+                <i class="fas fa-plus-square"></i>
+              </button>
+              <button type="button" class="btn btn-warning  btn-sm mr-1" *ngIf="item.active">
+                <i class="fas fa-edit"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body text-primary">
+            <h2>POSICION NUMERO {{item.number}}</h2>
+            <h4 class="h2">Ficha: </h4>
+            <h5>Dias Restantes: </h5>
+
+          </div>
+          <div class="card-footer text-white text-center bg-danger" *ngIf="item.active">TOMADO </div>
+          <div class="card-footer text-white text-center bg-info" *ngIf="!item.active">LIBRE </div>
+          
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-sm-6" *ngIf="asignar">
+    <div class="card border-primary mb-3 bg-dark" style="max-width: 18rem;">
+      <h5 class="card-header bg-dark text-white">
+        POSICION NUMERO {{letra.number}}
+      </h5>
+      <div class="card-body text-primary">
+        <form>
+          <mat-form-field class="example-full-width">
+            <mat-label class="form-label text-white">Buscar por Nombre Fantasia</mat-label>
+            <input type="text" placeholder="Pick one" aria-label="Number" matInput [(ngModel)]="selectoption"
+              class="form-control bg-secondary text-white" [formControl]="myControl" [matAutocomplete]="auto">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
+              (optionSelected)="getOption($event.option.value)">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <div class="form-group text-white">
+            <label for="exampleFormControlSelect1">Escoja el Paquete</label>
+            <select class="form-control" id="exampleFormControlSelect1" (change)="set($event.target.value)">
+              <option selected>Seleccione...</option>
+              <option *ngFor="let item of paquetes" [value]="item._id"> {{item?.titulo}}</option>
+            </select>
+          </div>
+          <div class="form-group text-white">
+            <label for="exampleFormControlSelect1">Numero de dias</label>
+            <select class="form-control" id="exampleFormControlSelect1">
+              <option selected>Seleccione...</option>
+              <option *ngFor="let item of days;" [value]="item+1">{{item+1}}</option>
+
+            </select>
+          </div>
+          <div class="form-group text-white">
+            <label for="exampleInputPassword1">Fecha de Inicio</label>
+            <input type="date" class="form-control" id="exampleInputPassword1">
+          </div>
+        </form>
+
+      </div>
+      <div class="card-footer bg-transparent">
+        <div class="btn-group mr-1 d-flex flex-row justify-content-around">
+          <button type="button" class="btn btn-danger  btn-sm mr-1" (click)="cancelar()">
+            <i class="fas fa-window-close"></i>
+          </button>
+          <button type="button" class="btn btn-success  btn-sm mr-1">
+            <i class="fas fa-check-square"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-sm-6" *ngIf="asignar">
+
+  </div>
+
+</div>
+
+
+
+<div *ngIf="createnew" class="modal-background" >
+  <div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display:block">
+    <div class="modal-dialog">
+      <div class="modal-content relax-gradiente">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Crear Nueva Letra</h5>
+          <button type="button" class="btn btn-dark  btn-sm"  data-dismiss="modal" aria-label="Close" (click)="closed()">
+            <i class="fas fa-window-close"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Defina la Posicion</label>
+            <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="position">
+            <small id="emailHelp" class="form-text text-muted">Escoja el numero correspondiente si ya esta tomada generara un error.</small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closed()">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="crearletra()">Crear</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal-loading [show]="loading" *ngIf="loading"></app-modal-loading>
+

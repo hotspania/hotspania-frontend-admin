@@ -1,0 +1,19 @@
+<div class="card">
+    <div class="card-header d-flex flex-row justify-content-around align-items-center relax-gradiente text-white">
+      <strong  class="text-success text-uppercase" > {{data.titulo}}  </strong>  
+      <button type="button" class="btn btn-outline-light" (click)="change()">Mas</button>
+    </div>
+    <div class="card-body" *ngIf="status">
+      <blockquote class="blockquote mb-0">
+        <p>{{data.mensaje}}</p>
+        <footer class="blockquote-footer">Noticia Creada <cite title="Source Title">{{data.creado | date:'short'}} por {{data.admin | ficha : 'admin' | async }}</cite></footer>
+      </blockquote>
+    </div>
+    <div class="card-footer" *ngIf="status">
+      <button type="button" class="btn btn-info btn-block" (click)="deleteOne()">Eliminar Noticia</button>
+    </div>
+</div>
+
+<app-modal-loading [show]="modal_loading"></app-modal-loading>
+
+  

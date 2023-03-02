@@ -1,0 +1,29 @@
+<div class="modal-background">
+    <div class="modal fade show" style="display:block" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Crear Nuevo Tag</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+              (click)="eventos.Closing()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Seleccione Tag</label>
+                  <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="tag" name="tag">
+                    <option *ngFor="let x of data" [value]="x.titulo" >{{x.titulo}}</option>
+                  </select>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" (click)="crear()">Guardar tag</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</div>

@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-md-12">
+    <img src="/assets/img/logo.png" class="img-fluid" alt="" srcset="">
+  </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="exampleFormControlSelect1" class="text-center">Seleccionar Ciudad</label>
+      <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="city">
+        <option selected value="choose">Escoger</option>
+        <option value="rosario">Rosario</option>
+        <option value="narnia">Narnia</option>
+        <option value="local">Local</option>        
+      </select>
+    </div>
+    <button class="btn btn-primary btn-block mb-3" (click)="nav()" [disabled]="city ==='choose' " >Entrar</button>
+  </div>
+
+</div>

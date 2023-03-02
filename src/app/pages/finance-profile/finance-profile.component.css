@@ -1,0 +1,43 @@
+.tabla-responsive {
+  overflow-x: auto;
+}
+
+.mat-column-monto {
+  max-width: 250px;
+  min-width: 200px;
+}
+
+.mat-column-clase {
+  max-width: 250px;
+  min-width: 150px;
+}
+
+.mat-column-paquete {
+  max-width: 120px;
+  min-width: 120px;
+}
+
+.mat-column-fecha {
+  max-width: 130px;
+  min-width: 130px;
+}
+
+.mat-column-descripcion {
+  min-width: 180px;
+  max-width: 330px;
+}
+
+.mat-column-admin {
+  max-width: 280px;
+  min-width: 180px;
+}
+
+.mat-column-actions {
+  min-width: 80px;
+  max-width: 80px;
+}
+
+tr,
+td{
+  border: none !important;
+}

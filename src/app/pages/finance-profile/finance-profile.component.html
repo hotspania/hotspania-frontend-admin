@@ -1,0 +1,371 @@
+<div class="row">
+  <div class="col-sm-6">
+    <div class="row">
+      <div class="col-xl-12 col-md-12 mb-4">
+        <div class="card border-left-primary shadow h-100 p-0 bg-dark" style="border: none;">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center" *ngIf="$profile">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-white text-uppercase mb-1">
+                  {{finanzas.user?.fakeData.username}}
+                </div>
+                <div class="text-xs font-weight-light text-white text-uppercase mb-1">
+                  Publicacion Creada : {{profile.creado | date}}
+                </div>
+                <div class="text-xs font-weight-light text-white text-uppercase mb-1">
+                  Listado Activo hasta: {{profile.fin | date}}
+                </div>
+                <div class="text-xs font-weight-light text-white text-uppercase mb-1">
+                  Dias Restantes: {{profile.dias}}
+                </div>
+
+              </div>
+              <div class="col-auto">
+                <div>
+                  <img [src]="profile.imagen | imagen:'profile' " alt=""
+                    style="height: 100px;width: 150px;border-radius: 10px;">
+                </div>
+                <button class="btn btn-info btn-small btn-block mt-2" (click)="openimagenlistado()">Cambiar</button>
+              </div>
+            </div>
+            <div class="row no-gutters align-items-center" *ngIf="!$profile">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-white text-uppercase mb-1">
+                  Este Usuario no tiene publicacion
+                </div>
+                <div class="text-xs font-weight-light text-white text-uppercase mb-1">
+                  Publicacion Creada :
+                </div>
+                <div class="text-xs font-weight-light text-white text-uppercase mb-1">
+                  Listado Activo hasta:
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="row">
+      <!-- Earnings (Monthly) Card Example -->
+      <div class="col-xl-4 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                  Balance General</div>
+                <div class="h5 mb-0 font-weight-bold" [ngStyle]="{'color': ( finanzas.balance >1 ) ? 'blue':'red'  }"
+                  *ngIf="$profile">
+                  {{finanzas.balance |currency:'ARS':'symbol':'1.0'}}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Earnings (Monthly) Card Example -->
+      <div class="col-xl-4 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                  Ingresos</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800" *ngIf="$profile">
+                  {{finanzas.input |currency:'ARS':'symbol':'1.0'}}
+                </div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pending Requests Card Example -->
+      <div class="col-xl-4 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                  Deuda Pendiente</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800" *ngIf="$profile">
+                  {{finanzas.pending |currency:'ARS':'symbol':'1.0'}}
+                </div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6 col-md-12 col-sm-12">
+    <div class="card shadow mb-4 bg-dark">
+      <div class="card-header py-3 bg-secondary">
+        <h5 class="m-0 h5 text-light text-center">Listado General</h5>
+      </div>
+      <div class="card-body text-center" *ngIf="$profile">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-success" *ngIf="profile.active"
+            (click)="setStates({'value':false,'x':'active'})">Bajar</button>
+          <button type="button" class="btn btn-warning" (click)="activarFicha()"
+            *ngIf="!profile.active">Activar</button>
+          <button type="button" class="btn btn-info" (click)="setStates({'value':true,'x':'freeze'})"
+            *ngIf="!profile.freeze">Congelar</button>
+          <button type="button" class="btn btn-primary" (click)="setStates({'value':false,'x':'freeze'})"
+            *ngIf="profile.freeze">Descongelar</button>
+          <button type="button" class="btn btn-secondary" (click)="setStates({'value':false,'x':'visible'})"
+            *ngIf="profile.visible">Visible</button>
+          <button type="button" class="btn btn-secondary" (click)="setStates({'value':true,'x':'visible'})"
+            *ngIf="!profile.visible">No Visible</button>
+          <button type="button" class="btn btn-success" disabled *ngIf="profile.online">Online</button>
+          <button type="button" class="btn btn-danger" disabled *ngIf="!profile.online">Off</button>
+          <button type="button" class="btn btn-primary" (click)="openeditarlistado()">Agregar Dias</button>
+          <!-- <button type="button" class="btn btn-secondary" (click)="setajuste()" >Ajustar Dias</button> -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-lg-6 col-md-12 col-sm-12">
+    <div class="card shadow mb-4 bg-dark">
+      <div class="card-header py-3 bg-secondary">
+        <h5 class="m-0 h5 text-light text-center">Letra</h5>
+      </div>
+      <div class="card-body text-center" *ngIf="$profile">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <!-- Illustrations -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-success">Realizar un Ingreso Rapido</h6>
+      </div>
+      <div class="card-body" *ngIf="$profile">
+        <app-input [user]="id" [profile]="profile._id" [admin]="admin._id"></app-input>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <!-- Illustrations -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-danger">Realizar Ajuste </h6>
+      </div>
+      <div class="card-body" *ngIf="$profile">
+        <app-output [user]="id" [profile]="profile._id" [admin]="admin._id"></app-output>
+      </div>
+    </div>
+  </div> 
+</div>
+
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <!-- Illustrations -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3 d-flex flex-row">
+        <div class="w-50">
+          <h3 class="m-0 font-weight-bold text-primary">Ultimos Ingresos</h3>
+        </div>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Filtrar por" #input class="w-100 form-control">
+      </div>
+      <div class="card-body tabla-responsive d-inline-flex flex-row justify-content-center" *ngIf="$profile">
+        <table #table1 mat-table [dataSource]="dataSource" #sort="matSort" matSort class="table-hover">
+          <!-- Position Column -->
+          <ng-container matColumnDef="monto">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Monto. </th>
+            <td mat-cell *matCellDef="let element"> {{element.monto}} </td>
+          </ng-container>
+          <!-- Name Column -->
+          <ng-container matColumnDef="descripcion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
+            <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+          </ng-container>
+          <!-- Weight Column -->
+          <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+            <td mat-cell *matCellDef="let element"> {{element.fecha | date}} </td>
+          </ng-container>
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="admin">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Admin </th>
+            <td mat-cell *matCellDef="let element"> {{element.admin| ficha : 'admin' | async}} </td>
+          </ng-container>
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let item">
+              <div class="btn-group mr-1">
+                <button type="button" class="btn btn-danger  btn-sm" (click)="borrar(item,'input')">
+                  <i class="fas fa-minus-circle"></i>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+
+      </div>
+      <div class="card-footer p-0">
+        <mat-paginator [pageSizeOptions]="[5,10, 20, 30]" showFirstLastButtons #paginator></mat-paginator>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <!-- Illustrations -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3 d-flex flex-row justify-content-betweeen">
+        <div class="w-50">
+          <h3 class="m-0 font-weight-bold text-primary">Ultimas Compras</h3>
+        </div>
+        <input matInput (keyup)="applyFilter2($event)" placeholder="Filtrar por" #input
+          class="form-control bg-gray">
+      </div>
+
+      <div class="card-body tabla-responsive d-inline-flex flex-column justify-content-center" *ngIf="$profile">
+
+        <table mat-table [dataSource]="dataSource2" #sort2="matSort" matSort class="table-hover" #table2>
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="paquete">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Paquete. </th>
+            <td mat-cell *matCellDef="let element"> {{element.paquete}} </td>
+          </ng-container>
+          <!-- Position Column -->
+          <ng-container matColumnDef="clase">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Clase. </th>
+            <td mat-cell *matCellDef="let element"> {{element.clase}} </td>
+          </ng-container>
+          <!-- Position Column -->
+          <ng-container matColumnDef="monto">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Monto. </th>
+            <td mat-cell *matCellDef="let element"> {{element.monto}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="descripcion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </th>
+            <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> fecha </th>
+            <td mat-cell *matCellDef="let element"> {{element.fecha | date}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="admin">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Admin </th>
+            <td mat-cell *matCellDef="let element"> {{element.admin| ficha : 'admin' | async}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let item">
+              <div class="btn-group mr-1">
+                <button type="button" class="btn btn-danger btn-sm" (click)="borrar(item,'output')">
+                  <i class="fas fa-minus-circle"></i>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedoutputColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedoutputColumns;"></tr>
+        </table>
+      </div>
+      <div class="card-footer p-0">
+        <mat-paginator [pageSizeOptions]="[5,10, 20, 30]" showFirstLastButtons #paginator2></mat-paginator>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <app-modal-loading [show]="modal_loading"></app-modal-loading>
+
+  <app-anuncio-listados *ngIf="modal_imagelistado"></app-anuncio-listados>
+
+  <app-modal-create-listado *ngIf="modal_createlistado"></app-modal-create-listado>
+
+  <app-modal-edit-listado *ngIf="modal_editlistado"></app-modal-edit-listado>
+
+
+  <div class="modal show" tabindex="-1" style="display:block" *ngIf="modal_confirmation">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Desea Borrar este Record</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="eventos.Closing()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h5>Monto: {{item_delete.amount}}</h5>
+          <h5>Descripcion: {{item_delete.description | currency:'ARS':'symbol':'1.0'}}</h5>
+          <h5>Fecha: {{item_delete.date | date}}</h5>
+          <h5>Admin: {{item_delete.admin | ficha : 'admin' | async }}</h5>
+          <h5>Tipo: {{tipo}}</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="eventos.Closing()">Cancelar</button>
+          <button type="button" class="btn btn-success" (click)="deleterecord()">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-background" *ngIf="modal_dias">
+    <div class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+      style="display:block">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ajustar Dias</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="eventos.Closing()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Dias</label>
+              <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                [(ngModel)]="dias">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="eventos.Closing()">Cancelar</button>
+            <button type="button" class="btn btn-success" (click)="ajustardias()">Aceptar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

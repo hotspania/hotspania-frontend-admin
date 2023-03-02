@@ -1,0 +1,121 @@
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Buscador Fichas</h1>
+      <button class="btn btn-info btn-icon-split" (click)="nav('crear','')">
+        <span class="text">
+          Crear Ficha
+        </span>
+        <span class="icon text-white-50">
+          <i class="fas fa-arrow-right"></i>
+        </span>
+      </button>
+    </div>
+
+    <div class="card shadow bg-dark tabla-responsive">
+      <div class="card-header py-3 bg-dark">
+        <form>
+          <div class="d-flex flex-row ">
+            <input type="text" class="form-control" placeholder="Filtre por algun campo especifico" aria-label="Username"
+              aria-describedby="basic-addon1" (keyup)="applyFilter($event)">
+          </div>
+        </form>
+      </div>
+
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table-dark ">
+  
+          <!-- Position Column -->
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre. </th>
+            <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+          </ng-container>
+  
+          <!-- Name Column -->
+          <ng-container matColumnDef="ficha">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Ficha </th>
+            <td mat-cell *matCellDef="let element"> {{element.ficha}} </td>
+          </ng-container>
+  
+          <!-- Weight Column -->
+          <ng-container matColumnDef="dni">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> DNI </th>
+            <td mat-cell *matCellDef="let element"> {{element.dni}} </td>
+          </ng-container>
+  
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="whatsapp">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Whatsapp </th>
+            <td mat-cell *matCellDef="let element"> {{element.whatsapp}} </td>
+          </ng-container>
+  
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="cel">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cel </th>
+            <td mat-cell *matCellDef="let element"> {{element.cel}} </td>
+          </ng-container>
+  
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="activa">
+            <th mat-header-cell *matHeaderCellDef > Activa </th>
+            <td mat-cell *matCellDef="let element"> {{element.activa | status : 'active' | async}} </td>
+          </ng-container>
+  
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="congelada">
+            <th mat-header-cell *matHeaderCellDef> Congelada </th>
+            <td mat-cell *matCellDef="let element"> {{element.congelada| status : 'freeze' | async}} </td>
+          </ng-container>
+  
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="visible">
+            <th mat-header-cell *matHeaderCellDef> Visible </th>
+            <td mat-cell *matCellDef="let element"> {{element.visible| status : 'visible' | async}} </td>
+          </ng-container>
+  
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="online">
+            <th mat-header-cell *matHeaderCellDef> Online </th>
+            <td mat-cell *matCellDef="let element"> {{element.online| status : 'online' | async}} </td>
+          </ng-container>
+  
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let item">
+              <div class="btn-group mr-1">
+                <button type="button" class="btn btn-primary  btn-sm" (click)="nav('allimages',item.actions)">
+                  <i class="far fa-image"></i>
+                </button>
+              </div>
+  
+              <div class="btn-group mr-1">
+                <button type="button" class="btn btn-info  btn-sm" (click)="nav('profile',item.actions)">
+                  <i class="fas fa-user"></i>
+                </button>
+              </div>
+              <div class="btn-group mr-1">
+                <button type="button" class="btn btn-danger  btn-sm" (click)="setpass(item)">
+                  <i class="fas fa-key"></i>
+                </button>
+              </div>
+              <div class="btn-group mr-1">
+                <button type="button" class="btn btn-success btn-sm" (click)="nav('finance-profile',item.actions)">
+                  <i class="fas fa-dollar-sign"></i>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+  
+        <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons class="bg-dark text-white"></mat-paginator>
+
+     
+
+    </div>
+
+    <app-modal-loading [show]="modal_loading"></app-modal-loading>
+
+
+    <app-changepassword [id]="item._id" [name]="item.fakeData?.username" *ngIf="modal_pass"></app-changepassword>

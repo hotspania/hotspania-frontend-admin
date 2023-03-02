@@ -1,0 +1,25 @@
+<div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">$</span>
+      </div>
+      <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" [(ngModel)]="value">
+      <div class="input-group-append">
+        <span class="input-group-text">.00</span>
+      </div>
+    </div>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Agregar Descripcion</span>
+      </div>
+      <textarea class="form-control" aria-label="With textarea" [(ngModel)]="description"></textarea>
+    </div>
+  
+    <button class="btn btn-success mt-2 ml-1" (click)="send()">
+      Enviar <i class="far fa-hand-point-right"></i>
+    </button>
+  
+  
+  </div>
+  <app-modal-loading [show]="modal_loading"></app-modal-loading>
+  

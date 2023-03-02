@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-sm-12">
+       <h4>Ultimos Vencimientos</h4> 
+    </div>
+    <div class="col-sm-12">
+        <div class="d-flex flex-row justify-content-center">
+            <table class="table table-dark text-center table-hover font-weight-light ">
+                <thead>
+                  <tr>
+                    <th scope="col">Imagen</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Dias Restantes</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of data">
+                    <th scope="row">
+                        <img [src]="item.imagen | imagen:'profile' " alt=""
+                        style="height: 50px;width: 40px;border-radius: 10px;">
+                    </th>
+                    <th scope="row" class="text-uppercase" >{{item?.user.fakeData.username}}</th>
+                    <td *ngIf="item.active" class="text-success" >ACTIVA</td>
+                    <td *ngIf="!item.active" class="text-danger" >INACTIVA</td>
+                    <td>{{item.dias}}</td>
+                    <td><button type="button" class="btn btn-primary" (click)="set(item.user._id)">Agregar Dias</button></td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+
+<app-modal-edit-listado *ngIf="modal_dias" [id]="id"></app-modal-edit-listado>

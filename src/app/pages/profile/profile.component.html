@@ -1,0 +1,183 @@
+<app-modaltag *ngIf="modal_tag" [id]="id"></app-modaltag>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-2">
+      <div class="card">
+        <div class="card-header">
+          Menu rapido
+        </div>
+        <div class="card-body">
+          <div class="d-flex flex-column">
+            <button class="btn btn-success mt-2" (click)="tag()">Crear Tag</button>
+            <button class="btn btn-info  mt-2" (click)="goficha('editrealprofile')">Editar Datos </button>
+            <button class="btn btn-info  mt-2" (click)="goficha('editfakeprofile')">Editar Ficticios</button>
+            <button class="btn btn-primary mt-2" (click)="goficha('allimages')"  >Ver Fotos</button>
+            <button class="btn btn-danger mt-2" (click)="setpass()"  >Cambiar Password</button>
+          </div>
+        </div>
+      </div>
+      <div class="card mt-3">
+        <div class="card-header">
+          Tags
+        </div>
+        <div class="card-body">
+          <table class="table table-borderless table-hover table-sm ">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col" class="text-center">Titulo</th>
+                <th scope="col" class="text-center">Actions</th>            
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let x of tags; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td class="text-center">{{x.titulo | uppercase }}</td>
+                <td class="text-center" >
+                  <button class="btn btn-danger btn-circle btn-sm" (click)="deletetags(x._id)">
+                    <i class="fas fa-trash"></i>
+                </button>     
+                </td>            
+              </tr>            
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10 toppad">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title text-center font-weight-bold h3">Perfil de la Anunciante</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row" *ngIf="!modal_loading">
+            <div class="col-md-6 col-lg-6 text-center mb-4">
+              <h3 class="font-weight-bold mb-2 ">DNI IMAGE</h3>
+              <img alt="User Pic" [src]="dni | imagen:'dni'" class="img-circle img-responsive" width="300">
+            </div>
+            <div class="col-md-6 col-lg-6 text-center mb-4">
+              <h3 class="font-weight-bold mb-2 ">Login Image</h3>
+              <app-imageuserlogin [id]="user._id"></app-imageuserlogin>               
+            </div>
+
+
+
+            <div class="col-md-12 col-lg-12 col-xs-12  ">
+
+              <h3 class="font-weight-bold mb-2 ">Datos Reales</h3>
+
+              <table class="table table-dark table-hover table-sm" >
+                <tbody>
+                  <tr>
+                    <td>Nombre Completo:</td>
+                    <td>{{user.realData?.nombre}}</td>
+                  </tr>
+                  <tr>
+                    <td>Dni:</td>
+                    <td>{{user.realData?.dni}}</td>
+                  </tr>
+                  <tr>
+                    <td>Email :</td>
+                    <td>{{user.email}}</td>
+                  </tr>
+
+                  <tr>
+                  <tr>
+                    <td>Telefono :</td>
+                    <td>{{user.realData?.telefono}}</td>
+                  </tr>
+                  <tr>
+                    <td>Fecha de Nacimiento :</td>
+                    <td>{{user.realData?.fecha_nacimiento}}</td>
+                  </tr>
+
+                </tbody>
+              </table>
+
+
+            </div>
+            <div class="col-md-12 col-lg-12 col-xs-12 ">
+              <h3 class="font-weight-bold mb-2 ">Datos Ficticios</h3>
+              <table class="table table-dark table-hover table-sm">
+                <tbody>
+                  <tr>
+                    <td>Nombre Ficha:</td>
+                    <td>{{user.fakeData?.username}}</td>
+                  </tr>
+                  <tr>
+                    <td>Edad:</td>
+                    <td>{{user.fakeData?.edad}}</td>
+                  </tr>
+                  <tr>
+                    <td>Estatura :</td>
+                    <td>{{user.fakeData?.estatura}}</td>
+                  </tr>
+                  <tr>
+                    <td>Whatsapp :</td>
+                    <td>{{user.fakeData?.whatsapp}}</td>
+                  </tr>
+                  <tr>
+                    <td>Telefono :</td>
+                    <td>{{user.fakeData?.telefono}}</td>
+                  </tr>
+                  <tr>
+                    <td>Busto:</td>
+                    <td>{{user.fakeData?.busto}}</td>
+                  </tr>
+                  <tr>
+                    <td>Cadera:</td>
+                    <td>{{user.fakeData?.cadera}}</td>
+                  </tr>
+                  <tr>
+                    <td>Cintura :</td>
+                    <td>{{user.fakeData?.cintura}}</td>
+                  </tr>
+                  <tr>
+                    <td>Genero :</td>
+                    <td>{{user.fakeData?.genero}}</td>
+                  </tr>
+                  <tr>
+                    <td>Peso :</td>
+                    <td>{{user.fakeData?.peso}}</td>
+                  </tr>
+
+                  <tr>
+                    <td>Servicios:</td>
+                    <td>{{user.fakeData?.servicios}}</td>
+                  </tr>
+                  <tr>
+                    <td>Dia de Inicio :</td>
+                    <td>{{user.fakeData?.inicio}}</td>
+                  </tr>
+                  <tr>
+                    <td>Dia de Fin :</td>
+                    <td>{{user.fakeData?.fin}}</td>
+                  </tr>
+                  <tr>
+                    <td>Horario :</td>
+                    <td>Desde las {{user.fakeData?.horario_inicio}} hasta las {{user.fakeData?.horario_fin}} </td>
+                  </tr>
+                  <tr>
+                    <td>Atencion :</td>
+                    <td>{{user.fakeData?.atencion}}</td>
+                  </tr>
+                  <tr>
+                    <td>Zonas :</td>
+                    <td>{{user.fakeData?.zonas}}</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal-loading [show]="modal_loading"></app-modal-loading>
+
+<app-changepassword [id]="id" [name]="user.fakeData?.username" *ngIf="modal_pass" ></app-changepassword>

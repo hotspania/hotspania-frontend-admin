@@ -1,0 +1,237 @@
+<form action="" [formGroup]="form">
+    <div class="row">
+      <div class="col-sm-12">
+        <button class="btn btn-info btn-icon-split" (click)="nav()" >
+          <span class="icon text-white-50">
+            <i class="fas fa-arrow-left"></i>
+          </span>
+          <span class="text">
+            Volver al Home
+          </span>
+        </button>  
+      </div>
+      <div class="col-sm-12">
+        <div class="text-center">
+          <h3>Datos de la Ficha</h3>
+        </div>
+      </div>
+
+    </div>
+    <div class="row p-4">
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Defina el NickName</label>
+          <input type="text" class="form-control" formControlName="username" aria-describedby="emailHelp">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Edad ?</label>
+          <input type="text" class="form-control" formControlName="edad" aria-describedby="emailHelp">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">WhatsApp</label>
+          <input type="text" class="form-control" formControlName="whatsapp" aria-describedby="emailHelp">
+          <small id="emailHelp" class="form-text text-muted">Ingrese el Numero de Atencion</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Telefono</label>
+          <input type="text" class="form-control" formControlName="telefono" aria-describedby="emailHelp">
+          <small id="emailHelp" class="form-text text-muted">Ingrese el Numero de Atencion</small>
+        </div>
+  
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="formGroupExampleInput">Fumadora?</label>
+          <select formControlName="fumadora"  class="form-control">
+            <option selected disabled>Seleccione...</option>
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput">Zona donde Trabajara</label>
+          <select formControlName="zonas"  class="form-control">
+            <option selected disabled>Choose...</option>
+            <option *ngFor="let item of zonas" [value]="item?.titulo">{{item.titulo}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput">Donde atendera?</label>        
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="Domicilio" [checked]="data?.atencion?.includes('Domicilio')" (change)="pushlocations($event)">
+            <label class="form-check-label" for="defaultCheck1">
+              Domicilio
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="Depto. Propio" [checked]="data?.atencion?.includes('Depto. Propio')" (change)="pushlocations($event)">
+            <label class="form-check-label" for="defaultCheck1">
+              Depto. Propio
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="Hoteles" [checked]="data?.atencion?.includes('Hoteles')" (change)="pushlocations($event)">
+            <label class="form-check-label" for="defaultCheck1">
+              Hoteles
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput">Genero</label>
+          <select formControlName="genero"  class="form-control">
+            <option selected disabled>Choose...</option>
+            <option value="Hombre">Hombre</option>
+            <option value="Mujer">Mujer</option>
+            <option value="Trans">Trans</option>
+            <option value="Travesti">Travesti</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput">Servicios que presta</label>
+          <select formControlName="servicios"  class="form-control">
+            <option selected disabled>Choose...</option>
+            <option value="Normales">Normales</option>
+            <option value="Normales y adicionales">Normales y adicionales</option>
+            <option value="Normales y completos">Normales y completos</option>
+            <option value="Normales y completos (Adicional)">Normales y completos (Adicional)</option>
+          </select>
+        </div>
+  
+  
+  
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Estatura</label>
+          <input type="text" class="form-control" formControlName="estatura" aria-describedby="emailHelp">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Peso</label>
+          <input type="text" class="form-control" formControlName="peso" aria-describedby="emailHelp">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput">Busto</label>
+          <input type="text" formControlName="busto" class="form-control" id="formGroupExampleInput" placeholder="">
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput">Cintura</label>
+          <input type="text" formControlName="cintura" class="form-control" id="formGroupExampleInput" placeholder="">
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput">Cadera</label>
+          <input type="text" formControlName="cadera" class="form-control" id="formGroupExampleInput" placeholder="">
+        </div>
+  
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="formGroupExampleInput">Dia de Inicio</label>
+          <select  formControlName="inicio" class="form-control">
+            <option selected disabled>Choose...</option>
+            <option value="Lunes">Lunes</option>
+            <option value="Martes">Martes</option>
+            <option value="Miercoles">Miercoles</option>
+            <option value="Jueves">Jueves</option>
+            <option value="Viernes">Viernes</option>
+            <option value="Sabado">Sabado</option>
+            <option value="Domingo">Domingo</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput">Dia de Fin</label>
+          <select  formControlName="fin" class="form-control">
+            <option selected disabled>Choose...</option>
+            <option value="Lunes">Lunes</option>
+            <option value="Martes">Martes</option>
+            <option value="Miercoles">Miercoles</option>
+            <option value="Jueves">Jueves</option>
+            <option value="Viernes">Viernes</option>
+            <option value="Sabado">Sabado</option>
+            <option value="Domingo">Domingo</option>
+          </select>
+        </div>
+        <div class="d-flex flex-row justify-content-around">
+          <div class="form-group">
+            <label for="formGroupExampleInput">Hora de Inicio</label>
+            <select  formControlName="horario_inicio" class="form-control">
+              <option selected disabled>Choose...</option>
+              <option value="Full">Full</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="00">00</option>
+            </select>
+          </div>
+    
+          <div class="form-group">
+            <label for="formGroupExampleInput">Hora de Fin</label>
+            <select  formControlName="horario_fin" class="form-control">
+              <option selected disabled>Choose...</option>
+              <option value="Time">Time</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="00">00</option>
+            </select>
+          </div>
+  
+        </div>
+  
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col">
+        <button class="btn btn-primary btn-block" (click)="save()" [disabled]="!form.valid">
+          Continuar
+        </button>
+      </div>
+    </div>
+  </form>
+  
+  
+  <app-modal-loading [show]="modal_loading"></app-modal-loading>
+  

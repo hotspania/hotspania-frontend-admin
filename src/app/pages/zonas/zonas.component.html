@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col">
+    <h3 class="text-center">Panel de Zonas de la Plataforma</h3>
+  </div>
+</div>
+<div class="row mt-3 p-2">
+  <div class="col-sm-4">
+    <h4 class="text-center">Crear Nueva Zona</h4>
+    <div class="p-5">
+        <form [formGroup]="form">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Nombre de la Zona</label>
+              <input type="email" class="form-control" formControlName="titulo" aria-describedby="emailHelp">
+              <small id="emailHelp" class="form-text text-muted">Ingrese el Nombre de la zona</small>
+            </div>       
+            <button type="submit" *ngIf="!flag" class="btn btn-primary" [disabled]="!form.valid" (click)="save()">Guardar</button>
+            <button type="submit" *ngIf="flag" class="btn btn-info" [disabled]="!form.valid" (click)="edit()">Guardar Cambios</button>
+        </form>
+    </div>
+  </div>
+  <div class="col-sm-8">
+    <h4 class="text-center">Zonas Actuales</h4>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Index</th>
+                <th>Titulo</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th>Index</th>
+                <th>Titulo</th>
+                <th>Actions</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              <tr *ngFor="let item of data;index as i"> 
+                <td>{{i+1}}</td>
+                <td>{{item.titulo}}</td>
+                <td>
+                    <div class="d-flex justify-content-start">
+                        <button class="btn btn-warning btn-circle btn-sm mr-2" (click)="set(item)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger btn-circle btn-sm">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </td>           
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+<app-modal-loading [show]="modal_loading"></app-modal-loading>

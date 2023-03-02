@@ -1,0 +1,73 @@
+
+
+<div color="dark">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card bg-dark text-light p-2">
+          <div>
+            2. Defina las Imagenes a utilizar
+          </div>
+          <div class="p-2">
+            <div class="container-fluid">
+              <div class="row">
+
+                <div class="col-sm-6">
+                  <h5>Imagenes Faltantes {{20-profileImages.length}}</h5>
+                </div>
+                <div class="col-sm-6">
+                  <div class="p-4 text-right">                   
+                    <button class="btn btn-info m-1" (click)="update()" *ngIf="status">
+                      Actualizar
+                    </button>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="d-flex flex-column justify-content-between align-items-start">
+                    <div class="d-flex flex-row flex-wrap ">
+                      <div class="card" *ngFor="let i of profileImages" style="max-width: 200px;" color="primary">
+                        <button class="btn btn-danger btn-circle btn-sm" type="button" aria-label="Close"
+                          (click)="quitarImagen(i)">
+                          <span aria-hidden="true">
+                            <i class="fas fa-trash"></i>
+                          </span>
+                        </button>
+                        <img [src]="i | imagen:'profile'" class="img-select z-depth-1" alt="Responsive image">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <h5>Seleccione 20 imagenes maximo para su perfil</h5>
+                </div>
+                <div class="col-sm-12">
+                  <div class="d-flex flex-column justify-content-between align-items-end">
+                    <div class="d-flex flex-row flex-wrap justify-content-around ">
+                      <div class="card m-1" *ngFor="let i of available_images" style="max-width: 200px;">
+                        <button class="btn btn-success btn-circle btn-sm" (click)="addImagen(i)" style="z-index: 1550;">
+                          <i class="fas fa-plus-circle"></i>
+                        </button>
+                        <img [src]="i.url | imagen:'profile'" class="img-select" alt="Responsive image">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+</div>
+
+<app-modal-loading [show]="modal_loading"></app-modal-loading>

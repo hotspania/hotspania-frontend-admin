@@ -1,0 +1,73 @@
+<div class="row">
+    <!-- <div class="col-sm-12">
+        <table class="table table-hover table-borderless">
+            <thead>
+              <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Usuario Image</th>
+                <th scope="col">Login Image</th>
+                <th scope="col">Similitud</th>
+                <th scope="col">Permisos</th>               
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of data">
+                <th scope="row">{{item.creado | date:'full' }}</th>
+                <td>{{item.user?.fakeData.username}}</td>
+                <td><app-imageuserlogin [id]="item.user._id"></app-imageuserlogin>  </td>
+                <td><img [src]="item.url | imagen:'login'" alt="" height="200"></td>
+                <td>{{item.similarity  }}</td>
+                <td *ngIf="!item.error">SI</td>
+                <td *ngIf="item.error">NO</td>
+              </tr>
+            </tbody>
+            <tfoot>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end" >
+                      <li class="page-item" [ngClass]="{disabled: (1===page)?true:false  }"  ><a class="page-link" (click)="addpage(page-1)">Previous</a></li>
+                      <div *ngFor="let i of number_of_pages">
+                        <li class="page-item" [ngClass]="{active: (i===page)?true:false  }"  ><a class="page-link" (click)="addpage(i)">{{i}}</a></li>            
+                      </div>
+                      <li class="page-item" [ngClass]="{disabled: (number_of_pages.length===page)?true:false  }"   ><a class="page-link" (click)="addpage(page+1)">Next</a></li>
+                    </ul>
+                  </nav>
+            </tfoot>
+          </table>
+
+    </div> -->
+    <div class="col-sm-12">
+      <table class="table table-hover table-borderless">
+          <thead>
+            <tr>
+              <th scope="col">Fecha</th>
+              <th scope="col">Email</th>
+              <th scope="col">Login</th>
+              <th scope="col">Error</th>                        
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of data">
+              <th scope="row">{{item.creado | date:'full' }}</th>
+              <td>{{item.email}}</td>
+              <td>{{item.status}} </td>        
+              <td *ngIf="!item.error">SI</td>
+              <td *ngIf="item.error">NO</td>
+            </tr>
+          </tbody>
+          <tfoot>
+              <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-end" >
+                    <li class="page-item" [ngClass]="{disabled: (1===page)?true:false  }"  ><a class="page-link" (click)="addpage(page-1)">Previous</a></li>
+                    <div *ngFor="let i of number_of_pages">
+                      <li class="page-item" [ngClass]="{active: (i===page)?true:false  }"  ><a class="page-link" (click)="addpage(i)">{{i}}</a></li>            
+                    </div>
+                    <li class="page-item" [ngClass]="{disabled: (number_of_pages.length===page)?true:false  }"   ><a class="page-link" (click)="addpage(page+1)">Next</a></li>
+                  </ul>
+                </nav>
+          </tfoot>
+        </table>
+
+  </div>
+
+</div>

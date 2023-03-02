@@ -1,0 +1,48 @@
+td,
+th {
+  color: #fff
+}
+
+.tabla-responsive {
+  overflow-x: auto;
+}
+
+.mat-column-nombre {
+  min-width: 150px;
+}
+
+.mat-column-ficha
+ {
+    min-width: 100px;
+}
+
+
+.mat-column-dni,
+.mat-column-whatsapp,
+.mat-column-cel{
+  min-width: 90px;
+}
+
+.mat-column-actions {
+    min-width: 120px;
+}
+
+.mat-column-activa,
+.mat-column-congelada,
+.mat-column-visible,
+.mat-column-online{
+    min-width:50px
+}
+
+.mat-form-field {
+  padding: 5px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-form-label{
+  color: #fff
+}
