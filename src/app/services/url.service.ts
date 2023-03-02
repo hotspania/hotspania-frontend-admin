@@ -12,9 +12,9 @@ export class UrlService {
   async getUrl(){
     let city = await this.ls.cargarStorage('city');
     switch (city) {
-      case 'rosario':
+      case 'barcelona':
         
-        return  Global.urlRosario;
+        return  Global.urlBarcelona;
       
       case 'narnia':
         
@@ -25,7 +25,7 @@ export class UrlService {
           return Global.urlLocal;  
 
       default:
-        return Global.urlRosario;
+        return Global.urlBarcelona;
     }
   }
 }
