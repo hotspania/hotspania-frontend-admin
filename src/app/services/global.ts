@@ -1,6 +1,6 @@
 export const Global ={
-    urlLocal:'http://localhost:3500/api/',
-    urlBarcelona:'http://185.166.214.67:3500/api/',
-    urlNarnia:'http://185.166.214.67:3500/api/',
-    url:'https://api.adminrelax.site/api/' 
+    urlLocal:'https://localhost:3500/api/',
+    urlBarcelona:'https://api.hotspania.es/api/',
+    urlNarnia:'https://api.hotspania.es/api/',
+    url:'https://api.hotspania.es/api/' 
  }
