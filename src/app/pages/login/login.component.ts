@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { AdminsUserService } from '../../services/admins-user.service';
 import { ToolsService } from '../../services/tools.service';
 
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   modal_loading:boolean=false;
 
 
-  constructor(private as:AdminsUserService,private router:Router,private tool:ToolsService) {
+  constructor(private ls:LocalStorageService, private as:AdminsUserService,private router:Router,private tool:ToolsService) {
     this.form=new FormGroup({
       email:new FormControl(null,Validators.required),
       password:new FormControl(null,Validators.required)
@@ -23,6 +24,9 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    if(window.location.href.includes('localhost')){
+      this.ls.SaveStorage('city', 'local');
+    }
     this.getInit();
   }
 

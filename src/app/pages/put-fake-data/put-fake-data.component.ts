@@ -42,7 +42,7 @@ export class PutFakeDataComponent implements OnInit {
 
   ngOnInit(): void {
     this.getZonas();
-    this.id= this.route.snapshot.paramMap.get('id');
+    this.id = this.route.snapshot.paramMap.get('id');
     this.city= this.route.snapshot.paramMap.get('city');
     this.form.patchValue({id:this.id});
   }
