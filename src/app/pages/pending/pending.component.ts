@@ -21,11 +21,11 @@ export interface fichaElement {
 
 
 @Component({
-  selector: 'app-all',
-  templateUrl: './all.component.html',
-  styleUrls: ['./all.component.css'],
+  selector: 'app-pending',
+  templateUrl: './pending.component.html',
+  styleUrls: ['./pending.component.css'],
 })
-export class AllComponent implements OnInit , AfterViewInit {
+export class PendingComponent implements OnInit , AfterViewInit {
   data: Array<fichaElement> = [];
   name = null;
   dni = null;
@@ -72,7 +72,7 @@ export class AllComponent implements OnInit , AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.getAll();   
+    this.getPending();   
 
     this.route.params.subscribe((params) => {
       this.city = params['city'];
@@ -85,7 +85,7 @@ export class AllComponent implements OnInit , AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  getAll() {
+  getPending() {
     this.modal_loading = true;
     let a = {
       name: this.name,
@@ -96,7 +96,7 @@ export class AllComponent implements OnInit , AfterViewInit {
       status: this.status,
     };
 
-    this.api.getFichas(a).subscribe((resp: any) => {
+    this.api.getFichasPendientes(a).subscribe((resp: any) => {
       if (resp.ok) {
         this.modal_loading = false;
         this.original_data = resp.data;
@@ -146,7 +146,7 @@ export class AllComponent implements OnInit , AfterViewInit {
   }
 
   navimages(rute) {
-    this.router.navigate([`/home/${this.city}/allimages/${rute}`]);
+    this.router.navigate([`/home/${this.city}/pendingimages/${rute}`]);
   }
 
   upimages(rute) {

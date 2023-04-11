@@ -31,6 +31,7 @@ import { SelectCityComponent } from "./select-city/select-city.component";
 import { TagsColletionComponent } from "./tags-colletion/tags-colletion.component";
 import { UploadImagesComponent } from "./upload-images/upload-images.component";
 import { ZonasComponent } from "./zonas/zonas.component";
+import { PendingComponent } from "./pending/pending.component";
 
 const routes: Routes = [
     {
@@ -44,6 +45,10 @@ const routes: Routes = [
         {
           path: ':city/all',
           component: AllComponent,
+        },
+        {
+          path: ':city/pending',
+          component: PendingComponent,
         },
         {
           path: ':city/crear',

@@ -70,6 +70,23 @@ export class ApiService {
       params: $params,
     });
   }
+
+  getFichasPendientes(items) {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    let $params = new HttpParams();
+    !!items.name ? ($params = $params.append('name', items.name)) : '';
+    !!items.dni ? ($params = $params.set('dni', items.dni)) : '';
+    !!items.email ? ($params = $params.set('email', items.email)) : '';
+    !!items.whatsapp ? ($params = $params.set('whatsapp', items.whatsapp)) : '';
+    !!items.cel ? ($params = $params.set('cel', items.cel)) : '';
+    !!items.status
+      ? ($params = $params.set('status', items.status))
+      : $params.set('status', '0');
+    return this.http.get(this.url + 'getpendingprofiles', {
+      headers: headers,
+      params: $params,
+    });
+  }
   getFicha(id): Observable<any> {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.get(this.url + 'getprofile/' + id, { headers: headers });

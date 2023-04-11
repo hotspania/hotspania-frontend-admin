@@ -4,6 +4,7 @@ import { AddMultiPaqueteComponent } from './add-multi-paquete/add-multi-paquete.
 import { AdminsUserComponent } from './admins-user/admins-user.component';
 import { AllImagesComponent } from './all-images/all-images.component';
 import { AllComponent } from './all/all.component';
+import { PendingComponent } from './pending/pending.component';
 import { AnuncioGeneralComponent } from './anuncio-general/anuncio-general.component';
 import { AnuncioListadosComponent } from './anuncio-listados/anuncio-listados.component';
 import { ConfigureAnunciosComponent } from './configure-anuncios/configure-anuncios.component';
@@ -46,6 +47,7 @@ import routes from './pages-routing.module';
     HomeComponent,
     CrearFichaComponent,
     AllComponent,
+    PendingComponent,
     ProfileComponent,
     PutFakeDataComponent,
     UploadImagesComponent,
@@ -81,6 +83,7 @@ import routes from './pages-routing.module';
     HomeComponent,
     CrearFichaComponent,
     AllComponent,
+    PendingComponent,
     ProfileComponent,
     PutFakeDataComponent,
     UploadImagesComponent,
