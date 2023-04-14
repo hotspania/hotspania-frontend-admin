@@ -32,6 +32,7 @@ export class AllComponent implements OnInit , AfterViewInit {
   email = null;
   whatsapp = null;
   cel = null;
+  activa = null;
   status = '';
   modal_loading: boolean = false;
   page: number = 1;
@@ -94,21 +95,22 @@ export class AllComponent implements OnInit , AfterViewInit {
       whatsapp: this.whatsapp,
       cel: this.cel,
       status: this.status,
+      activa: this.activa,
     };
 
     this.api.getFichas(a).subscribe((resp: any) => {
       if (resp.ok) {
         this.modal_loading = false;
         this.original_data = resp.data;
-        console.log('wf', resp.data);
         this.data = this.original_data.map(x => {
           return {
+            id:x._id,
             nombre:x.realData?.nombre,
             ficha:x.fakeData?.username,
             dni:x.realData?.dni,
             whatsapp:x.fakeData?.whatsapp,
             cel:x.realData?.telefono,
-            activa:x._id,
+            activa:x.activa === 1 ? "Si" : "No",
             congelada:x._id,
             visible:x._id,
             online:x._id,

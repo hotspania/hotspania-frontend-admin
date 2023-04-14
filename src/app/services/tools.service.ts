@@ -7,13 +7,14 @@ import Swal from 'sweetalert2';
 export class ToolsService {
   constructor() {}
 
-  ShowSuccess() {
+  ShowSuccess(message:string = "") {
     Swal.fire({
       position: 'top-end',
       icon: 'success',
-      title: 'Your work has been saved',
+      title: "Cambios aplicados",
       showConfirmButton: false,
-      timer: 1500
+      timer: 2000,
+      text: message || ""
     });
   }
 
@@ -21,7 +22,9 @@ export class ToolsService {
     Swal.fire({
       icon: 'error',
       title: 'Error !!',
-      text: message,
+      showConfirmButton: false,
+      timer: 2000,
+      text: message || ""
     });
   }
 

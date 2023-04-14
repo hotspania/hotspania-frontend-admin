@@ -10,10 +10,18 @@
         <div class="card-body">
           <div class="d-flex flex-column">
             <button class="btn btn-success mt-2" (click)="tag()">Crear Tag</button>
-            <button class="btn btn-info  mt-2" (click)="goficha('editrealprofile')">Editar Datos </button>
-            <button class="btn btn-info  mt-2" (click)="goficha('editfakeprofile')">Editar Ficticios</button>
-            <button class="btn btn-primary mt-2" (click)="goficha('allimages')"  >Ver Fotos</button>
-            <button class="btn btn-danger mt-2" (click)="setpass()"  >Cambiar Password</button>
+            <button class="btn btn-info mt-2" (click)="goficha('editrealprofile')">Editar Datos </button>
+            <button class="btn btn-info mt-2" (click)="goficha('editfakeprofile')">Editar Ficticios</button>
+            <button class="btn btn-primary mt-2" (click)="goficha('allimages')">Ver Fotos</button>
+            <button class="btn btn-danger mt-2" (click)="setpass()">Cambiar Password</button>
+            <hr style="width:100%; border: 1px solid #ccc;"/>
+            <span class="w-100 text-center">Ficha <b *ngIf="!user.status">Desactivada</b> <b *ngIf="user.status">Activa</b></span>
+            <form class="w-100" id="aprobarFicha" name="aprobarFicha" method="POST">
+              <button *ngIf="!user.status" class="w-100 btn btn-success mt-2" (click)="updateFicha(1)">Activar Ficha</button>
+              <button *ngIf="user.status" class="w-100 btn btn-danger mt-2" (click)="updateFicha(0)">Desactivar Ficha</button>
+            </form>
+            <hr style="width:100%; border: 1px solid #ccc;"/>
+            <button class="w-100 btn btn-danger mt-2" data-toggle="modal" data-target="#exampleModalCenter">Borrar Ficha y Usuario</button>
           </div>
         </div>
       </div>
@@ -173,6 +181,27 @@
           </div>
         </div>
 
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark w-100 text-center" id="exampleModalLongTitle" style="font-size: 18px;">Eliminar Ficha <b>{{ user.realData?.nombre }}</b></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="w-100 text-center text-danger" style="font-size: 18px;">Al eliminar la ficha se perderá ésta y el usuario para siempre.</p>
+      </div>
+      <div class="modal-footer">
+        <form class="w-100" method="POST">
+          <button type="button" class="w-100 btn btn-danger" (click)="deleteFicha()">Eliminar</button>
+        </form>
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0 text-gray-800">Buscador Fichas Activas</h1>
+      <h1 class="h3 mb-0 text-gray-800">Buscador Fichas Pendientes</h1>
       <button class="btn btn-info btn-icon-split" (click)="nav('crear','')">
         <span class="text">
           Crear Ficha
@@ -56,7 +56,7 @@
           <!-- Symbol Column -->
           <ng-container matColumnDef="activa">
             <th mat-header-cell *matHeaderCellDef > Activa </th>
-            <td mat-cell *matCellDef="let element"> {{element.activa | status : 'active' | async}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.activa}} </td>
           </ng-container>
   
           <!-- Symbol Column -->
@@ -80,7 +80,7 @@
           <!-- Symbol Column -->
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Actions </th>
-            <td mat-cell *matCellDef="let item">
+            <td mat-cell *matCellDef="let item; let element;" style="display: flex; flex-direction: row;">
               <div class="btn-group mr-1">
                 <button type="button" class="btn btn-primary  btn-sm" (click)="nav('allimages',item.actions)">
                   <i class="far fa-image"></i>

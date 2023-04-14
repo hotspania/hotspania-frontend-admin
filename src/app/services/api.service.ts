@@ -27,6 +27,7 @@ export class ApiService {
 
   async setURL() {
     this.url = await this.u.getUrl().then((x) => x);
+    console.log('fewg', this.url);
   }
 
   //Fichas
@@ -69,6 +70,12 @@ export class ApiService {
       headers: headers,
       params: $params,
     });
+  }
+
+  updateFichaStatus(form: any): Observable<any> {
+    const data = JSON.stringify(form);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post(this.url + `updateficha`, data, { headers: headers });
   }
 
   getFichasPendientes(items) {
@@ -360,6 +367,17 @@ export class ApiService {
   getLoginImageUser(id): Observable<any> {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.get(this.url + 'getloginuser/'+id, { headers: headers });
+  }
+
+  //Delete
+  deleteProfile(id:string): Observable<any> {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.delete(this.url + 'deleteprofile/' + id, { headers: headers });
+  }
+
+  deleteUser(id:string): Observable<any> {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.delete(this.url + 'deleteuser/' + id, { headers: headers });
   }
 
 }

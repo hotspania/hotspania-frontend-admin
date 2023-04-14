@@ -5,6 +5,7 @@ import { EventosService } from 'src/app/services/eventos.service';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 export interface fichaElement {
   nombre:string;
@@ -39,7 +40,6 @@ export class PendingComponent implements OnInit , AfterViewInit {
   number_of_pages: any = [];
   number: number = 10;
   city: string = '';
-
   item: any = [];
   modal_pass: boolean = false;
 
@@ -100,15 +100,15 @@ export class PendingComponent implements OnInit , AfterViewInit {
       if (resp.ok) {
         this.modal_loading = false;
         this.original_data = resp.data;
-        console.log('wf', resp.data);
         this.data = this.original_data.map(x => {
           return {
+            id:x._id,
             nombre:x.realData?.nombre,
             ficha:x.fakeData?.username,
             dni:x.realData?.dni,
             whatsapp:x.fakeData?.whatsapp,
             cel:x.realData?.telefono,
-            activa:x._id,
+            activa:x.activa === 1 ? "Si" : "No",
             congelada:x._id,
             visible:x._id,
             online:x._id,
