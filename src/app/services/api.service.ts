@@ -27,7 +27,7 @@ export class ApiService {
 
   async setURL() {
     this.url = await this.u.getUrl().then((x) => x);
-    console.log('fewg', this.url);
+    //this.url = 'http://localhost:3500/api/';
   }
 
   //Fichas
@@ -70,6 +70,16 @@ export class ApiService {
       headers: headers,
       params: $params,
     });
+  }
+
+  getNotifications() {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get(this.url + `getnotifications`, { headers: headers });
+  }
+
+  deleteAllNotifications() {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.delete(this.url + 'deleteallnotifications', { headers: headers });
   }
 
   updateFichaStatus(form: any): Observable<any> {

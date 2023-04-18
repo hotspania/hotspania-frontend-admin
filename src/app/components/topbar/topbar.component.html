@@ -42,48 +42,31 @@
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
                 <!-- Counter - Alerts -->
-                <span class="badge badge-danger badge-counter">3+</span>
+                <span *ngIf="notifications.length > 0" class="badge badge-danger badge-counter">{{notifications.length}}</span>
             </a>
             <!-- Dropdown - Alerts -->
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                 aria-labelledby="alertsDropdown">
-                <h6 class="dropdown-header">
-                    Alerts Center
-                </h6>
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                <div class="dropdown-header" style="display: flex; justify-content:space-between; flex-direction:row;">
+                    <h6 style="font-size: 18px; font-weight: bold;">
+                        Notificaciones
+                    </h6>
+
+                    <a (click)="deleteAllNotifications()" title="Borrar todas las notificaciones" style="cursor: pointer; color:red; font-size: 20px;"><i class="fas fa-times"></i></a>
+                </div>
+
+                <a *ngFor="let n of notifications; index as i;" style="cursor: pointer" title="Ver fichas pendientes" class="dropdown-item d-flex align-items-center" (click)="nav('/pending')">
                     <div class="mr-3">
                         <div class="icon-circle bg-primary">
-                            <i class="fas fa-file-alt text-white"></i>
+                            <i class="fas fa-user text-white"></i>
                         </div>
                     </div>
                     <div>
-                        <div class="small text-gray-500">December 12, 2019</div>
-                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                        <div class="font-weight-bold small text-gray-500">{{n.titulo}}</div>
+                        <span class="">{{n.descripcion}}</span>
                     </div>
                 </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="mr-3">
-                        <div class="icon-circle bg-success">
-                            <i class="fas fa-donate text-white"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="small text-gray-500">December 7, 2019</div>
-                        $290.29 has been deposited into your account!
-                    </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="mr-3">
-                        <div class="icon-circle bg-warning">
-                            <i class="fas fa-exclamation-triangle text-white"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="small text-gray-500">December 2, 2019</div>
-                        Spending Alert: We've noticed unusually high spending for your account.
-                    </div>
-                </a>
-                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                <a style="cursor: pointer" class="dropdown-item text-center small text-gray-500" title="Ver fichas pendientes" (click)="nav('/pending')">Ver todas</a>
             </div>
         </li>
 
@@ -93,7 +76,7 @@
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-envelope fa-fw"></i>
                 <!-- Counter - Messages -->
-                <span class="badge badge-danger badge-counter">7</span>
+                <span class="badge badge-danger badge-counter"></span>
             </a>
             <!-- Dropdown - Messages -->
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
