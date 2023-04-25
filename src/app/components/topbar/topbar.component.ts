@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class TopbarComponent implements OnInit {
   usuario:any=[];
   city: any="";
-  public notifications:any;
+  public notifications:any = [];
   constructor(private router:Router, private ls:LocalStorageService, private us:AdminsUserService, private api:ApiService) { }
 
   ngOnInit(): void {

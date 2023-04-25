@@ -20,7 +20,7 @@ export class AllImagesComponent implements OnInit {
   item:any=[];
   city: any;
   status:string="ACCEPTED";
-  tipo:string="profile";
+  tipo:string="original";
 
   constructor(
     private route: ActivatedRoute,

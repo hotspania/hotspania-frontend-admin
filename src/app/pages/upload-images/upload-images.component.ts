@@ -20,7 +20,7 @@ export class UploadImagesComponent implements OnInit {
   id:string="";
   specs:any=[];
   upload:boolean=false;
-  imagetype:string="";
+  imagetype:string="original";
 
 
   constructor(private up:UploadService,private route:ActivatedRoute,private api:ApiService,private tool:ToolsService,private router:Router) { }
