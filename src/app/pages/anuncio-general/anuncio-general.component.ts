@@ -23,7 +23,7 @@ export class AnuncioGeneralComponent implements OnInit {
   fecha_inicio: string = '';
   set_inicio:string="";
   statusi:string="ACCEPTED";
-  tipo:string="profile";
+  tipo:string="original";
 
   constructor(
     private api: ApiService,
@@ -77,6 +77,7 @@ export class AnuncioGeneralComponent implements OnInit {
     this.api.getProfile(id).subscribe((resp: any) => {
       if (resp.ok) {
         this.data = resp.data;
+        console.log('asd',this.data);
         this.data ? (this.status = true) : (this.status = false);
         this.profileImages = this.data.imagenes.map((x: any) => x);  
         let a = dayjs();       

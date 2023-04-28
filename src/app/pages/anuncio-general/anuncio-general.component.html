@@ -32,7 +32,7 @@
                             <i class="fas fa-trash"></i>
                           </span>
                         </button>
-                        <img [src]="i | imagen:'profile'" class="img-select z-depth-1" alt="Responsive image">
+                        <img [src]="i | imagen:'original'" class="img-select z-depth-1" alt="Responsive image">
                       </div>
                     </div>
                   </div>
@@ -41,7 +41,7 @@
               </div>
               <div class="row">
                 <div class="col-sm-12">
-                  <h5>Seleccione 20 imagenes maximo para su perfil</h5>
+                  <h5>Seleccione 20 imagenes maximo para su perfil. Actualmente: {{available_images.length}}</h5>
                 </div>
                 <div class="col-sm-12">
                   <div class="d-flex flex-column justify-content-between align-items-end">
@@ -50,7 +50,7 @@
                         <button class="btn btn-success btn-circle btn-sm" (click)="addImagen(i)" style="z-index: 1550;">
                           <i class="fas fa-plus-circle"></i>
                         </button>
-                        <img [src]="i.url | imagen:'profile'" class="img-select" alt="Responsive image">
+                        <img [src]="i.url | imagen:'original'" class="img-select" alt="Responsive image">
                       </div>
                     </div>
                   </div>
